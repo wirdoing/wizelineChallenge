@@ -24,20 +24,25 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.opera.OperaDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class SetUp {
 	static WebDriver driver;
 	static ExtentHtmlReporter htmlReporter;
 	static ExtentTest test;
 	static ExtentReports extent;
-	static String htmlReportPath = "/Users/danielgarcia/Downloads/borrar/";
 	static String timeStamp;
+	static String htmlReportPath = "challengeA/reports";
 	static String timeStamp2;
 	File srcFiler;
 
@@ -45,7 +50,7 @@ public class SetUp {
 	public static void reporter() {
 		timeStamp = new SimpleDateFormat("dd-MMMM-yyyy", new Locale("ES", "MX")).format(new Date());
 		timeStamp2 = new SimpleDateFormat("dd-MMMM-yyyy - hh;mm;ss a").format(new Date());
-		htmlReporter = new ExtentHtmlReporter(htmlReportPath + timeStamp2 + ".html");
+		htmlReporter = new ExtentHtmlReporter(htmlReportPath +"/"+ timeStamp + ".html");
 		extent = new ExtentReports();
 		extent.attachReporter(htmlReporter);
 	}
@@ -55,7 +60,7 @@ public class SetUp {
 		Properties prop = new Properties();
 		FileInputStream inputStream2;
 		try {
-			inputStream2 = new FileInputStream("src/test/resources/config.properties");
+			inputStream2 = new FileInputStream("challengeA/src/test/resources/config.properties");
 			prop.load(inputStream2);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -65,14 +70,27 @@ public class SetUp {
 		String browser = prop.getProperty("driver").toLowerCase();
 		switch (browser) {
 			case "chrome":
-			System.setProperty("webdriver.chrome.driver", "/Users/danielgarcia/Downloads/borrar/chromedriver");
-			driver = new ChromeDriver();
+				WebDriverManager.chromedriver().setup();
+				driver = new ChromeDriver();
 				break;
 			case "firefox":
-			System.setProperty("webdriver.gecko.driver", "/Users/danielgarcia/Downloads/borrar/geckodriver");
-			driver = new FirefoxDriver();
+				WebDriverManager.firefoxdriver().setup();
+				driver = new FirefoxDriver();
 				break;
+			case "edge":
+				WebDriverManager.edgedriver().setup();
+				driver = new EdgeDriver();
+				break;
+			case "internet explorer":
+				WebDriverManager.iedriver().setup();
+				driver = new InternetExplorerDriver();
+				break;
+			case "opera":
+				WebDriverManager.operadriver().setup();
+				driver = new OperaDriver();
 			default:
+				WebDriverManager.chromedriver().setup();
+				driver = new ChromeDriver();
 				break;
 		}
 		driver.manage().window().maximize();
@@ -92,9 +110,9 @@ public class SetUp {
         if (result.getStatus() == ITestResult.FAILURE)
         {
 			srcFiler = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-			FileUtils.copyFile(srcFiler, new File("/Users/danielgarcia/Downloads/borrar/" + timeStamp + "/" + timeStamp2 + ".png"));
+			FileUtils.copyFile(srcFiler, new File("challengeA/reports" +"/"+ timeStamp + "/" + timeStamp2 + ".png"));
 			test.log(Status.FAIL, MarkupHelper.createLabel(result.getName() + " Test case FAILED due to below issues:", ExtentColor.RED));
-			test.fail("Photo of the error", MediaEntityBuilder.createScreenCaptureFromPath("/Users/danielgarcia/Downloads/borrar/" + timeStamp + "/" + timeStamp2 + ".png").build());
+			test.fail("Photo of the error", MediaEntityBuilder.createScreenCaptureFromPath("challengeA/reports" + timeStamp + "/" + timeStamp2 + ".png").build());
 			test.fail(result.getThrowable());
 
         } 

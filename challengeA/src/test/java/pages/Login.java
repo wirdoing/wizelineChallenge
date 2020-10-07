@@ -4,26 +4,28 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 public class Login extends BasePage {
 
-    By UserNameField = By.id("user-name");
-    By PasswordField = By.id("password");
-    By LoginButton = By.id("login-button");
-    By ErrorMessageLogin = By.className("error-button");
-    By ProductsPage = By.className("product_label");
-    By Items = By.xpath("//div[@class='inventory_item']");
-    By ItemsCheckout = By.xpath("//div[@class='cart_item']");
-    By NumberOfObjectsInCart = By.xpath("//span[@class='fa-layers-counter shopping_cart_badge']");
-    By ItemName = By.className("inventory_item_name");
-    By AddToCartButton = By.xpath("//button[contains(text(),'ADD')]");
-    By CheckoutButton = By.xpath("//a[contains(text(),'CHECKOUT')]");
-    By FirstNameField = By.id("first-name");
-    By LastNameField = By.id("last-name");
-    By ZipCodeField = By.id("postal-code");
-    By ContinueButton = By.xpath("//input[@value='CONTINUE']");
-    By FinishButton = By.xpath("//a[contains(text(),'FINISH')]");
+    @FindBy(id = "user-name") By UserNameField;
+    @FindBy(id = "password") WebElement PasswordField;
+    @FindBy(id = "login-button") WebElement LoginButton;
+    @FindBy(id = "last-name") WebElement LastNameField;
+    @FindBy(id = "first-name") WebElement FirstNameField;
+    @FindBy(id = "postal-code") WebElement ZipCodeField;
+    @FindBy(xpath = "//div[@class='inventory_item']") By Items;
+    @FindBy(xpath = "//div[@class='cart_item']") WebElement ItemsCheckout;
+    @FindBy(xpath = "//span[@class='fa-layers-counter shopping_cart_badge']") WebElement NumberOfObjectsInCart;
+    @FindBy(xpath = "//button[contains(text(),'ADD')]") By AddToCartButton;
+    @FindBy(xpath = "//a[contains(text(),'CHECKOUT')]") WebElement CheckoutButton;
+    @FindBy(xpath = "//input[@value='CONTINUE']") WebElement ContinueButton;
+    @FindBy(xpath = "//a[contains(text(),'FINISH')]") WebElement FinishButton;
+    @FindBy(className = "error-button") WebElement ErrorMessageLogin;
+    @FindBy(className = "product_label") WebElement ProductsPage;
+    @FindBy(className = "inventory_item_name") By ItemName;
+
 
     public void enterUserName(String UserName){
         sendText(UserNameField, UserName);

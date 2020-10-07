@@ -1,0 +1,9 @@
+.vscode/settings.json
+challengeA/.project
+challengeA/.classpath
+challengeA/.settings
+challengeA/target
+.DS_Store
+challengeA/test-output
+reports/
+

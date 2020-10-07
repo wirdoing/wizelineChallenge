@@ -14,38 +14,53 @@ public class CoreMethods {
         driver = SetUp.GetDriver();
     }
 
-    public static WebElement WaitElementToBePresent(By locator){
-        WebElement element = (new WebDriverWait(driver,10)).until(ExpectedConditions.presenceOfElementLocated(locator));
+    public static WebElement WaitElementToBePresent(WebElement webElement) {
+        WebElement element = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.presenceOfElementLocated((By) webElement));
         return (WebElement) element;
     }
 
-    public static WebElement WaitElementToBeClickable(By locator){
-        WebElement element = (new WebDriverWait(driver,10)).until(ExpectedConditions.elementToBeClickable(locator));
+    public static WebElement WaitElementToBePresent(By locator) {
+        WebElement element = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.presenceOfElementLocated(locator));
         return (WebElement) element;
     }
 
-    public static void clickElement(By locator) {
-        WaitElementToBeClickable(locator).click();
+    public static WebElement WaitElementToBeClickable(WebElement webElement) {
+        WebElement element = (new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(webElement));
+        return (WebElement) element;
     }
 
-    public static void elementIsDisplayed(By locator) {
-        WaitElementToBeClickable(locator).isDisplayed();
+    public static WebElement WaitElementToBeClickable(By locator) {
+        WebElement element = (new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(locator));
+        return (WebElement) element;
     }
 
-    public static Boolean isElementDisplayed(By locator) {
-        return WaitElementToBeClickable(locator).isDisplayed();
+    public static void clickElement(WebElement webElement) {
+        WaitElementToBeClickable(webElement).click();
+    }
+
+    public static void elementIsDisplayed(WebElement webElement) {
+        WaitElementToBeClickable(webElement).isDisplayed();
+    }
+
+    public static Boolean isElementDisplayed(WebElement webElement) {
+        return WaitElementToBeClickable(webElement).isDisplayed();
     }
 
     public static void sendText(By locator, String text){
         WaitElementToBeClickable(locator).sendKeys(text);
     }
-
-    public static void clearField(By locator) {
-        WaitElementToBeClickable(locator).clear();
+    public static void sendText(WebElement webElement, String text){
+        WaitElementToBeClickable(webElement).sendKeys(text);
     }
 
-    public static String getText(By locator) {
-        return WaitElementToBePresent(locator).getText();
+    public static void clearField(WebElement webElement) {
+        WaitElementToBeClickable(webElement).clear();
+    }
+
+    public static String getText(WebElement webElement) {
+        return WaitElementToBePresent(webElement).getText();
     }
 
     public static WebDriver getDriver() {
