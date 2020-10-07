@@ -42,7 +42,7 @@ public class SetUp {
 	static ExtentTest test;
 	static ExtentReports extent;
 	static String timeStamp;
-	static String htmlReportPath = "challengeA/reports";
+	static String htmlReportPath = "challengeA/reports/";
 	static String timeStamp2;
 	File srcFiler;
 
@@ -50,7 +50,7 @@ public class SetUp {
 	public static void reporter() {
 		timeStamp = new SimpleDateFormat("dd-MMMM-yyyy", new Locale("ES", "MX")).format(new Date());
 		timeStamp2 = new SimpleDateFormat("dd-MMMM-yyyy - hh;mm;ss a").format(new Date());
-		htmlReporter = new ExtentHtmlReporter(htmlReportPath +"/"+ timeStamp + ".html");
+		htmlReporter = new ExtentHtmlReporter(htmlReportPath +"/"+ timeStamp + timeStamp2 + ".html");
 		extent = new ExtentReports();
 		extent.attachReporter(htmlReporter);
 	}

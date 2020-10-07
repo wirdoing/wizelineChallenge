@@ -56,7 +56,7 @@ public class CSVDataProvider {
 
     @DataProvider(name = "credentials")
     public static Object[][] getathleteData() throws IOException {
-		File filePath = new File("challengeA/src/test/resources/NewData.csv");
+		File filePath = new File("src/test/resources/NewData.csv");
 		Object obj[][] = readCsv(filePath);
 
 		return obj;

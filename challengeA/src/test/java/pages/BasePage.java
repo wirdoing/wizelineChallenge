@@ -1,17 +1,16 @@
 package pages;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 
 import setUp.CoreMethods;
 
 public class BasePage extends CoreMethods{
 
-    @FindBy(xpath = "//button[contains(text(),'Open Menu')]/parent::div") WebElement HamburgerMenu;
-    @FindBy(id = "logout_sidebar_link") WebElement LogoutButton;
-    @FindBy(xpath = "//*[local-name() = 'svg']") WebElement ShoppingCartButton;
-    @FindBy(className = "subheader") WebElement ShoppingCartPage;
+    By HamburgerMenu = By.xpath("//button[contains(text(),'Open Menu')]/parent::div");
+    By LogoutButton = By.id("logout_sidebar_link");
+    By ShoppingCartButton = By.xpath("//*[local-name() = 'svg']");
+    By ShoppingCartPage = By.className("subheader");
 
 
     public void clickMenu() {
